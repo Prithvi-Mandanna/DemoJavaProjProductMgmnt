@@ -14,7 +14,7 @@ public class ProductDb {
 //                e.printStackTrace();
 //            }
 //        }
-        //comment to test git - to be removed
+
         String url = "jdbc:mysql://localhost:3306/springjdbc";
         String username = "Mandu";
         String password = "Mandu";
