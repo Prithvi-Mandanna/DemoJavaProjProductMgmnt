@@ -12,12 +12,12 @@ public class Main {
 
 		//Product p = new Product("Laptop", "Electronics", "Kathmandu", 1);
 		ProductService service = new ProductService();
-		service.addProduct(new Product("Laptop", "Electronics", "Kathmandu", 2003));
-		service.addProduct(new Product("Mobile", "Electronics", "Madikeri", 2005));
-		service.addProduct(new Product("Shoes", "Fashion", "Bangalore", 2025));
-		service.addProduct(new Product("Shirt", "Fashion", "Madikeri", 2003));
-		service.addProduct(new Product("Bag", "Fashion", "Bangalore", 2005));
-		service.addProduct(new Product("Watch", "Fashion", "Kathmandu", 2003));
+//		service.addProduct(new Product("Laptop", "Electronics", "Kathmandu", 2003));
+//		service.addProduct(new Product("Mobile", "Electronics", "Madikeri", 2005));
+//		service.addProduct(new Product("Shoes", "Fashion", "Bangalore", 2025));
+//		service.addProduct(new Product("Shirt", "Fashion", "Madikeri", 2003));
+//		service.addProduct(new Product("Bag", "Fashion", "Bangalore", 2005));
+//		service.addProduct(new Product("Watch", "Fashion", "Kathmandu", 2003));
 
 		List<Product> products = service.getAllProducts();
 		for (Product product : products) {

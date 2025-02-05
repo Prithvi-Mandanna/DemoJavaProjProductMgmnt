@@ -1,51 +1,28 @@
 package com.mandu.productManagement;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDb {
-    Connection con = null;
+    private Connection con = null;
     public ProductDb() {
 
-        //adding a new MySQL database connection
-//        static {
-//            try {
-//                Class.forName("com.mysql.cj.jdbc.Driver");
-//            } catch (ClassNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
         String url = "jdbc:mysql://localhost:3306/springjdbc";
-        String username = "Mandu";
+        String username = "root";
         String password = "Mandu";
         try {
-            Connection con = DriverManager.getConnection(url, username, password);
+            con = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-//        Connection con;
-
-//        {
-//            try {
-//                con = DriverManager.getConnection(url, username, password);
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
     }
 
-
-
-
     public void save(Product product) {
-        String query = "insert into product values(?,?,?,?)";
+        String query = "insert into product (name, type, place, warranty) values(?,?,?,?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(query);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
             ps.setString(1, product.getName());
             ps.setString(2, product.getType());
             ps.setString(3, product.getPlace());
@@ -54,6 +31,28 @@ public class ProductDb {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    public List<Product> getAllProductsFromDB() {
+        List<Product> products = new ArrayList<>();
+        String query = "Select * from product";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(query);
+            //code to return the result set
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String type = rs.getString("type");
+                String place = rs.getString("place");
+                int warranty = rs.getInt("warranty");
+                Product product = new Product(name, type, place, warranty);
+                products.add(product);
+            }
+            //ps.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return products;
     }
 }

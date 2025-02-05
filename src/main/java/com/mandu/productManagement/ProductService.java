@@ -1,25 +1,19 @@
 package com.mandu.productManagement;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class ProductService {
 
     ProductDb db = new ProductDb();
     List<Product> products = new ArrayList<>();
     public void addProduct(Product p) {
-
-
         db.save(p);
         //products.add(p);
     }
 
     public List<Product> getAllProducts() {
-        return products;
-
+        return db.getAllProductsFromDB();
     }
 
 //    public void getOneProduct(String productName) {
@@ -31,6 +25,7 @@ public class ProductService {
 //    }
 
     public Product getOneProduct(String productName) {
+        products = db.getAllProductsFromDB();
         for (Product product : products){
             if (product.getName().equals(productName)){
                 return product;
