@@ -1,11 +1,19 @@
 package com.mandu.productManagement;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ProductService {
 
-    ProductDb db = new ProductDb();
+    //Commenting as we do not need a data layer OR ProductDb clsss when working with Spring JPA
+    //ProductDbOrm db = new ProductDbOrm();
+    @Autowired
+    ProductDb db;
     List<Product> products = new ArrayList<>();
     public void addProduct(Product p) {
         db.save(p);
@@ -13,7 +21,8 @@ public class ProductService {
     }
 
     public List<Product> getAllProducts() {
-        return db.getAllProductsFromDB();
+        return db.findAll();
+        //return db.getAllProductsFromDB();
     }
 
 //    public void getOneProduct(String productName) {
@@ -25,7 +34,7 @@ public class ProductService {
 //    }
 
     public Product getOneProduct(String productName) {
-        products = db.getAllProductsFromDB();
+        products = db.findAll();
         for (Product product : products){
             if (product.getName().equals(productName)){
                 return product;

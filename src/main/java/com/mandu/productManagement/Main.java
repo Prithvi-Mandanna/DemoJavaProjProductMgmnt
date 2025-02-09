@@ -1,5 +1,6 @@
 package com.mandu.productManagement;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,8 +12,14 @@ public class Main {
 	public static void main(String[] args) {
 
 		//Product p = new Product("Laptop", "Electronics", "Kathmandu", 1);
-		ProductService service = new ProductService();
-//		service.addProduct(new Product("Laptop", "Electronics", "Kathmandu", 2003));
+		//ProductService service; = new ProductService();
+
+        ApplicationContext context = SpringApplication.run(Main.class, args);
+		ProductService service = context.getBean(ProductService.class);
+
+
+
+//		service.addProduct(new Product("Lamborghini", "Automobile", "Kathmandu", 2003));
 //		service.addProduct(new Product("Mobile", "Electronics", "Madikeri", 2005));
 //		service.addProduct(new Product("Shoes", "Fashion", "Bangalore", 2025));
 //		service.addProduct(new Product("Shirt", "Fashion", "Madikeri", 2003));
