@@ -33,7 +33,7 @@ public class Main {
 		System.out.println("-------------------");
 		//This is to get the location of one product
 		System.out.println("Details if one product is:");
-		System.out.println(service.getOneProduct("Laptop"));
+		service.getOneProduct("Laptop");
 
 		//This is to get the products by Location
 		System.out.println("Products by Location Bangalore are:");

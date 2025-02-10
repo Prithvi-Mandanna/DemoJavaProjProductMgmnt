@@ -1,7 +1,6 @@
 package com.mandu.productManagement;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,26 +32,28 @@ public class ProductService {
 //        }
 //    }
 
-    public Product getOneProduct(String productName) {
-        products = db.findAll();
+    public void getOneProduct(String productName) {
+        products = db.findByName(productName);
+//        for (Product product : products){
+//            if (product.getName().equals(productName)){
+//                return product;
+//                            }
+//        }
         for (Product product : products){
-            if (product.getName().equals(productName)){
-                return product;
-                            }
+            System.out.println(product);
         }
-        return null;
     }
 
     public void getProductsByLocation(String productLocation) {
 
-        List<Product> productsByPlace = new ArrayList<>();
+        List<Product> productsByPlace = db.findByPlace(productLocation);
 
 
-        for (Product product: products){
-            if (product.getPlace().equals(productLocation)){
-                productsByPlace.add(product);
-            }
-        }
+//        for (Product product: products){
+//            if (product.getPlace().equals(productLocation)){
+//                productsByPlace.add(product);
+//            }
+//        }
 
         for (Product p: productsByPlace){
             System.out.println(p);
@@ -64,9 +65,14 @@ public class ProductService {
 
 
     public void getProductsOutOfWarranty(int warrantyYear) {
-    //List<Product> prodsOutOfWarranty = new ArrayList<>();
+    List<Product> prodsOutOfWarranty = db.findByWarrantyLessThan(warrantyYear);
+        System.out.println("Products Out of Warranty using JPA are as below");
+    for (Product product: prodsOutOfWarranty){
+        System.out.println(product);
+    }
 
         //Below code is written using Stream API function
+        System.out.println("Products Out of Warranty using Stream API as below");
     products.stream()
             .filter(n -> n.getWarranty() < warrantyYear)
             .forEach(System.out::println);
