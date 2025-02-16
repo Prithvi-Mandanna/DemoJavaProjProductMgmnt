@@ -1,5 +1,10 @@
-package com.mandu.productManagement;
+package com.mandu.productManagement.service;
 
+import com.mandu.productManagement.entity.Product;
+import com.mandu.productManagement.entity.ProductAllocation;
+import com.mandu.productManagement.repo.EmployeeDb;
+import com.mandu.productManagement.repo.ProductAllocationDb;
+import com.mandu.productManagement.repo.ProductDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +18,13 @@ public class ProductService {
     //ProductDbOrm db = new ProductDbOrm();
     @Autowired
     ProductDb db;
+
+    @Autowired
+    EmployeeDb employeeDb;
+
+    @Autowired
+    ProductAllocationDb productAllocationDb;
+
     List<Product> products = new ArrayList<>();
     public void addProduct(Product p) {
         db.save(p);
@@ -89,5 +101,57 @@ public class ProductService {
 //            System.out.println("There are no products out of warranty");
 //        }
 
+    }
+
+
+    public void getProductsAllocatedToEmployee(int i) {
+
+        List<ProductAllocation> productsAllocatedToEmployee = productAllocationDb.findByEmployeeId(i);
+//        Optional<ProductAllocation> productsAllocatedToEmployee = productAllocationDb.findByEmployeeId(i);
+//        if (productsAllocatedToEmployee.isPresent()){
+//            return productsAllocatedToEmployee.get();
+//        } else {
+//            System.out.println("There are no products allocated to employee with id " + i);
+//        }
+        for (ProductAllocation product: productsAllocatedToEmployee){
+            System.out.println(product.getProduct());
+        }
+        if (productsAllocatedToEmployee.isEmpty()){
+            System.out.println("There are no products allocated to employee with id " + i);
+        }
+    }
+
+    public void getAllProductAllocations() {
+
+        List<ProductAllocation> allProductAllocations = productAllocationDb.findAll();
+        for (ProductAllocation product: allProductAllocations){
+            System.out.println(product.getEmployee());
+            System.out.println(product.getProduct());
+            System.out.println();
+
+        }
+        if (allProductAllocations.isEmpty()){
+            System.out.println("There are no products allocated to any employee");
+        }
+    }
+
+    public void getTop5ProductAllocations(){
+        List<ProductAllocation> allocations = new ArrayList<>();
+        allocations = productAllocationDb.findTop5ByOrderByProductAllocationIdDesc();
+        for (ProductAllocation top5Allocations: allocations){
+            System.out.println(top5Allocations.getEmployee());
+            System.out.println(top5Allocations.getProduct());
+            System.out.println();
+        }
+    }
+
+    public void allocateProductToEmployee(int employeeId, int productId) {
+
+        System.out.println("Allocating product with id " + productId + " to employee with id " + employeeId);
+        ProductAllocation allocation = new ProductAllocation();
+        allocation.setEmployee(employeeDb.findById(employeeId).get());
+        allocation.setProduct(db.findById(productId).get());
+        allocation.setAllocatedAt(java.time.LocalDateTime.now());
+        productAllocationDb.save(allocation);
     }
 }

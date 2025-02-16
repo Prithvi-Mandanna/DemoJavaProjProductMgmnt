@@ -1,21 +1,21 @@
-package com.mandu.productManagement;
+package com.mandu.productManagement.entity;
 
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import org.hibernate.annotations.BatchSize;
-import org.springframework.boot.autoconfigure.web.WebProperties;
+import jakarta.persistence.*;
+
+import java.util.Objects;
 
 @Entity
+@Table(name = "product")
 public class Product {
 
-    @jakarta.persistence.Id
+    @Id
     //This is to auto generate the id. We need to define a strategy for the generation of the id
     //The strategy GenerationType.IDENTITY specifies that the id will be auto generated as per database feature
-    @jakarta.persistence.GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id") // Map to the correct column name
+    private Integer productId; // Rename the field to match the column name
     private String name;
     private String type;
     private String place;
@@ -63,13 +63,19 @@ public class Product {
         this.warranty = warranty;
     }
 
-    public Integer getId() {
-        return Id;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Product product = (Product) o;
+//        return Objects.equals(Id, product.Id);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(Id);
+//    }
 
-    public void setId(Integer id) {
-        Id = id;
-    }
 
     @Override
     public String toString() {

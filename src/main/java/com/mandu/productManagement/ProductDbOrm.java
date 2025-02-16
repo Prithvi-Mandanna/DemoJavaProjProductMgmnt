@@ -1,5 +1,7 @@
 package com.mandu.productManagement;
 
+import com.mandu.productManagement.entity.Product;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

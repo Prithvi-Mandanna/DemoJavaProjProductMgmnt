@@ -1,7 +1,9 @@
 package com.mandu.productManagement;
 
+import com.mandu.productManagement.entity.Product;
+import com.mandu.productManagement.service.EmployeeService;
+import com.mandu.productManagement.service.ProductService;
 import org.springframework.context.ApplicationContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,8 +18,7 @@ public class Main {
 
         ApplicationContext context = SpringApplication.run(Main.class, args);
 		ProductService service = context.getBean(ProductService.class);
-
-
+		EmployeeService employeeService = context.getBean(EmployeeService.class);
 
 //		service.addProduct(new Product("Lamborghini", "Automobile", "Kathmandu", 2003));
 //		service.addProduct(new Product("Mobile", "Electronics", "Madikeri", 2005));
@@ -42,6 +43,19 @@ public class Main {
 		//This is to get the products that are out of warranty
 		System.out.println("Products that are out of warranty are:");
 		service.getProductsOutOfWarranty(2005);
+
+		//Employee data
+		System.out.println("------------Employee Data------------");
+		employeeService.getAllEmployees();
+
+		//service.allocateProductToEmployee(3,117);
+
+		//Code to get products allocated to an employee
+		System.out.println("Products allocated to an employee are:");
+		service.getTop5ProductAllocations();
+		//service.getAllProductAllocations();
+		service.getProductsAllocatedToEmployee(1);
+
 	}
 
 }
