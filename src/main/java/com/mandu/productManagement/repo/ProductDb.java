@@ -14,7 +14,5 @@ public interface ProductDb extends JpaRepository<Product, Integer> {
     //@Query("select p from product p where p.warranty < ?1")
     List<Product> findByWarrantyLessThan(int warranty);
     List<Product> findByName(String name);
-
-
-
+    List<Product> findByType(String productType);
 }

@@ -26,8 +26,8 @@ public class ProductService {
     ProductAllocationDb productAllocationDb;
 
     List<Product> products = new ArrayList<>();
-    public void addProduct(Product p) {
-        db.save(p);
+    public Product addProduct(Product p) {
+        return db.save(p);
         //products.add(p);
     }
 
@@ -121,18 +121,10 @@ public class ProductService {
         }
     }
 
-    public void getAllProductAllocations() {
+    public List<ProductAllocation> getAllProductAllocations() {
 
         List<ProductAllocation> allProductAllocations = productAllocationDb.findAll();
-        for (ProductAllocation product: allProductAllocations){
-            System.out.println(product.getEmployee());
-            System.out.println(product.getProduct());
-            System.out.println();
-
-        }
-        if (allProductAllocations.isEmpty()){
-            System.out.println("There are no products allocated to any employee");
-        }
+        return allProductAllocations;
     }
 
     public void getTop5ProductAllocations(){
@@ -145,13 +137,23 @@ public class ProductService {
         }
     }
 
-    public void allocateProductToEmployee(int employeeId, int productId) {
+    public ProductAllocation allocateProductToEmployee(int employeeId, int productId) {
 
         System.out.println("Allocating product with id " + productId + " to employee with id " + employeeId);
         ProductAllocation allocation = new ProductAllocation();
         allocation.setEmployee(employeeDb.findById(employeeId).get());
         allocation.setProduct(db.findById(productId).get());
         allocation.setAllocatedAt(java.time.LocalDateTime.now());
-        productAllocationDb.save(allocation);
+        return productAllocationDb.save(allocation);
+    }
+
+    public List<Product> getProductsByType(String productType) {
+        return db.findByType(productType);
+    }
+
+    public Product getProductById(Integer product_id) {
+        //getting product by productId
+        return db.findById(product_id).get();
+        //return db.findByProductId(product_id);
     }
 }
