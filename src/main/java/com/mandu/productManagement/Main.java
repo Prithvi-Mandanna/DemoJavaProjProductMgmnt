@@ -55,7 +55,6 @@ public class Main {
 		service.getTop5ProductAllocations();
 		//service.getAllProductAllocations();
 		service.getProductsAllocatedToEmployee(1);
-
 	}
 
 }

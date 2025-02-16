@@ -3,11 +3,16 @@ package com.mandu.productManagement.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
+//import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.util.Objects;
 
+//@XmlRootElement
 @Entity
 @Table(name = "product")
+//@Data is a Lombok annotation to create all the getters, setters, equals, hash, and toString methods, based on the fields
+@Data
 public class Product {
 
     @Id
@@ -31,59 +36,4 @@ public class Product {
         this.warranty = warranty;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public int getWarranty() {
-        return warranty;
-    }
-
-    public void setWarranty(int warranty) {
-        this.warranty = warranty;
-    }
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Product product = (Product) o;
-//        return Objects.equals(Id, product.Id);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(Id);
-//    }
-
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", place='" + place + '\'' +
-                ", warranty=" + warranty +
-                '}';
-    }
 }
