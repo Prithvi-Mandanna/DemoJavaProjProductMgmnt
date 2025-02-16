@@ -1,10 +1,28 @@
-package com.mandu.productManagement;
+package com.mandu.productManagement.entity;
 
+
+
+import jakarta.persistence.*;
+
+import java.util.Objects;
+
+@Entity
+@Table(name = "product")
 public class Product {
-	private String name;
+
+    @Id
+    //This is to auto generate the id. We need to define a strategy for the generation of the id
+    //The strategy GenerationType.IDENTITY specifies that the id will be auto generated as per database feature
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id") // Map to the correct column name
+    private Integer productId; // Rename the field to match the column name
+    private String name;
     private String type;
     private String place;
     private int warranty;
+
+    public Product() {
+    }
 
     public Product(String name, String type, String place, int warranty) {
         this.name = name;
@@ -44,6 +62,20 @@ public class Product {
     public void setWarranty(int warranty) {
         this.warranty = warranty;
     }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Product product = (Product) o;
+//        return Objects.equals(Id, product.Id);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(Id);
+//    }
+
 
     @Override
     public String toString() {

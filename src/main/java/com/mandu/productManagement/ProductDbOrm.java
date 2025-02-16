@@ -1,12 +1,14 @@
 package com.mandu.productManagement;
 
+import com.mandu.productManagement.entity.Product;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDb {
+public class ProductDbOrm {
     private Connection con = null;
-    public ProductDb() {
+    public ProductDbOrm() {
 
         String url = "jdbc:mysql://localhost:3306/springjdbc";
         String username = "root";
