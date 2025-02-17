@@ -84,10 +84,10 @@ public class ProductService {
     }
 
         //Below code is written using Stream API function
-        System.out.println("Products Out of Warranty using Stream API as below");
-    products.stream()
-            .filter(n -> n.getWarranty() < warrantyYear)
-            .forEach(System.out::println);
+//        System.out.println("Products Out of Warranty using Stream API as below");
+//    products.stream()
+//            .filter(n -> n.getWarranty() < warrantyYear)
+//            .forEach(System.out::println);
 
 
 //        for (Product product : products){
