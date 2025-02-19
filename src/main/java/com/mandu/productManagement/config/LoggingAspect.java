@@ -1,4 +1,4 @@
-package com.mandu.productManagement;
+package com.mandu.productManagement.config;
 
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
